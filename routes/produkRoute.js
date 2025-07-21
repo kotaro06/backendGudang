@@ -1,8 +1,9 @@
 // backend/routes/produkRoute.js
 const express = require("express")
 const router = express.Router()
-const { getALLJNSProduk } = require("../controllers/produkController")
+const { getALLJNSProduk, addJNSProduk } = require("../controllers/produkController")
 
 router.get("/jns-produk", getALLJNSProduk)
+router.post("/jns-produk", addJNSProduk)
 
 module.exports = router
