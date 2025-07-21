@@ -1,7 +1,7 @@
 // backend/controllers/produkController.js
 const db = require("../config/db")
 
-const getALLJNSProduk = (req, res) => {
+const getALLJenisProduk = (req, res) => {
   db.query("SELECT * FROM tbl_jns_produk", (err, results) => {
     if (err) {
       return res.status(500).json({ message: "Gagal ambil data", error: err })
@@ -11,7 +11,7 @@ const getALLJNSProduk = (req, res) => {
 }
 
 
-const addJNSProduk = (req, res) => {
+const addJenisProduk = (req, res) => {
   const { jns_produk, diskripsi } = req.body
   if (!jns_produk || !diskripsi) {
     return res.status(400).json({ message: "Data tidak lengkap" })
@@ -29,7 +29,34 @@ const addJNSProduk = (req, res) => {
   )
 }
 
+const updateJenisProduk = (req, res) => {
+  const { id } = req.params
+  const { jns_produk, diskripsi } = req.body
+
+  db.query(
+    "UPDATE tbl_jns_produk SET jns_produk=?, diskripsi=? WHERE id=?",
+    [jns_produk, diskripsi, id],
+    (err, result) => {
+      if (err) return res.status(500).json({ message: "Gagal update", error: err })
+      res.json({ message: "Produk berhasil diupdate" })
+    }
+  )
+}
+
+const deleteJenisProduk = (req, res) => {
+  const { id } = req.params
+
+  db.query("DELETE FROM tbl_jns_produk WHERE id=?", [id], (err) => {
+    if (err) return res.status(500).json({ message: "Gagal hapus", error: err })
+    res.json({ message: "Produk dihapus" })
+  })
+}
+
+
+
 module.exports = {
-  getALLJNSProduk,
-  addJNSProduk, // tambahkan di sini
+  getALLJenisProduk,
+  addJenisProduk,
+  updateJenisProduk,
+  deleteJenisProduk
 }
