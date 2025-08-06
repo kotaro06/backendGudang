@@ -108,9 +108,30 @@ const deleteJenisProduk = (req, res) => {
   })
 }
 
+// ... kode sebelumnya tetap sama ...
+
+const countJenisProduk = (req, res) => {
+  console.log("⏱️  Mengakses endpoint countJenisProduk...");
+  
+  db.query("SELECT COUNT(*) AS count FROM tbl_jns_produk", (err, results) => {
+    if (err) {
+      console.error("Error counting jenis produk:", err);
+      return res.status(500).json({ 
+        message: "Gagal mengambil jumlah produk" 
+      });
+    }
+    
+    console.log("✅ Hasil count:", results[0].count);
+    res.json({ count: results[0].count });
+  });
+}
+
+// ... ekspor fungsi tetap sama ...
+
 module.exports = {
   getALLJenisProduk,
   addJenisProduk,
   updateJenisProduk,
-  deleteJenisProduk
+  deleteJenisProduk,
+  countJenisProduk
 }

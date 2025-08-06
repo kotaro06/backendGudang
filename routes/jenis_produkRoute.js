@@ -7,8 +7,9 @@ const {
   getALLJenisProduk,
   addJenisProduk,
   updateJenisProduk,
-  deleteJenisProduk
-} = require("../controllers/produkController")
+  deleteJenisProduk,
+  countJenisProduk
+} = require("../controllers/jenis_produkController")
 
 // Buat folder uploads jika belum ada
 const uploadDir = path.join(__dirname, '../uploads')
@@ -35,5 +36,6 @@ router.get("/jns-produk", getALLJenisProduk)
 router.post("/jns-produk", upload.single("gambar"), addJenisProduk)
 router.put("/jns-produk/:id", upload.single("gambar"), updateJenisProduk)
 router.delete("/jns-produk/:id", deleteJenisProduk)
+router.get("/jns-produk/count", countJenisProduk)
 
 module.exports = router

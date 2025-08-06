@@ -1,7 +1,7 @@
 // backend/server.js
 const express = require("express")
 const cors = require("cors")
-const produkRoutes = require("./routes/produkRoute")
+const produkRoutes = require("./routes/jenis_produkRoute")
 require("dotenv").config()
 
 const app = express()
